@@ -376,6 +376,87 @@
             padding: 2rem 0;
         }
 
+        /* Diagram Gallery */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .image-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .image-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            cursor: zoom-in;
+        }
+
+        .image-card .caption {
+            padding: 1rem 1.25rem;
+            color: var(--text);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .image-card .caption a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 2rem;
+        }
+
+        .lightbox.open {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .lightbox .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -427,6 +508,7 @@
                 <li><a href="#architecture">Architecture</a></li>
                 <li><a href="#tech">Tech Stack</a></li>
                 <li><a href="#features">Features</a></li>
+                <li><a href="#diagrams">Diagrams</a></li>
             </ul>
         </div>
     </nav>
@@ -441,6 +523,43 @@
                 <span class="hero-badge">⚡ Real-Time</span>
                 <span class="hero-badge">🗺️ Route Optimization</span>
                 <span class="hero-badge">🌦️ Weather-Aware</span>
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#overview" style="background:#fff;color:var(--dark);padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:600;box-shadow:var(--shadow)">Explore Overview</a>
+                <a href="#tech" style="background:rgba(255,255,255,0.2);color:#fff;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:600;border:1px solid rgba(255,255,255,0.4)">View Tech Stack</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diagrams Section -->
+    <section id="diagrams" style="background: #ffffff;">
+        <div class="container">
+            <h2 class="section-title">System Diagrams</h2>
+            <p style="text-align:center; color: var(--text-light); max-width: 900px; margin: 0 auto;">
+                Explore the core visuals behind the orchestrator: use cases, high-level design, and the full system architecture.
+            </p>
+            <div class="image-grid">
+                <div class="image-card fade-in">
+                    <img src="usecase_diagram.png" alt="Use Case Diagram" loading="lazy" data-full="usecase_diagram.png">
+                    <div class="caption">
+                        <span>Use Case Diagram</span>
+                        <a href="usecase_diagram.png" download>Download</a>
+                    </div>
+                </div>
+                <div class="image-card fade-in">
+                    <img src="highleveldesign.png" alt="High-Level Design" loading="lazy" data-full="highleveldesign.png">
+                    <div class="caption">
+                        <span>High-Level Design</span>
+                        <a href="highleveldesign.png" download>Download</a>
+                    </div>
+                </div>
+                <div class="image-card fade-in">
+                    <img src="system_architecture.png" alt="System Architecture" loading="lazy" data-full="system_architecture.png">
+                    <div class="caption">
+                        <span>System Architecture</span>
+                        <a href="system_architecture.png" download>Download</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -729,6 +848,10 @@ Frontend updates map instantly
     </section>
 
     <!-- Footer -->
+    <div class="lightbox" id="lightbox">
+        <button class="close-btn" id="lightboxClose" aria-label="Close">✕ Close</button>
+        <img id="lightboxImg" src="" alt="Diagram preview">
+    </div>
     <footer>
         <div class="container">
             <p style="font-size: 1.2rem; margin-bottom: 1rem;">Intelligent Logistics Orchestrator</p>
@@ -768,6 +891,36 @@ Frontend updates map instantly
                     });
                 }
             });
+        });
+
+        // Lightbox behavior for diagram images
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        function openLightbox(src, alt) {
+            lightboxImg.src = src;
+            lightboxImg.alt = alt || 'Diagram preview';
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            lightboxImg.src = '';
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('img[data-full]').forEach(img => {
+            img.addEventListener('click', () => openLightbox(img.getAttribute('data-full'), img.alt));
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
         });
     </script>
 </body>
