@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Logistics Orchestrator - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0074D9;
+            --secondary: #39CCCC;
+            --accent: #FF4136;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-1);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: move 20s linear infinite;
+        }
+
+        @keyframes move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            margin: 0.5rem;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1.2s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .tech-category {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .tech-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-list li {
+            padding: 0.5rem 0;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tech-list li::before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Architecture Flow */
+        .flow-diagram {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-top: 3rem;
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .flow-step {
+            background: var(--gradient-3);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            position: relative;
+            min-width: 150px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        /* Feature List */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .feature-item:hover {
+            transform: translateX(10px);
+        }
+
+        .feature-item h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--dark);
+            color: #f8f8f2;
+            padding: 2rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            box-shadow: var(--shadow);
+        }
+
+        .code-block code {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .flow-steps {
+                flex-direction: column;
+            }
+
+            .flow-step::after {
+                content: '↓';
+                right: 50%;
+                top: auto;
+                bottom: -30px;
+                transform: translateX(50%);
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">🚚 Logistics Orchestrator</div>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#tech">Tech Stack</a></li>
+                <li><a href="#features">Features</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Intelligent Logistics Orchestrator</h1>
+            <p>An AI-powered logistics optimization system that intelligently routes delivery vehicles using multi-agent orchestration, operations research, and real-time data integration.</p>
+            <div>
+                <span class="hero-badge">🤖 AI-Powered</span>
+                <span class="hero-badge">⚡ Real-Time</span>
+                <span class="hero-badge">🗺️ Route Optimization</span>
+                <span class="hero-badge">🌦️ Weather-Aware</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview">
+        <div class="container">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="highlight-box fade-in">
+                <h4>What This Project Does</h4>
+                <p>This is an intelligent logistics orchestration system that optimizes vehicle routing for deliveries. It uses AI agents (LangGraph) to intelligently coordinate multiple factors including supplier availability, weather conditions, time windows, and vehicle constraints to create optimal delivery routes. The system provides real-time updates through WebSocket connections and an interactive map visualization.</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="card fade-in">
+                    <div class="card-icon">🎯</div>
+                    <h3>Multi-Constraint Optimization</h3>
+                    <p>Optimizes routes considering vehicle capacity, time windows, service times, and multiple delivery stops simultaneously.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="card-icon">⚡</div>
+                    <h3>Real-Time Updates</h3>
+                    <p>WebSocket-based live updates allow instant route recalculation when new orders are added or incidents occur.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="card-icon">🌦️</div>
+                    <h3>Weather Integration</h3>
+                    <p>Automatically adjusts routes and time estimates based on weather alerts from OpenWeatherMap API.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="card-icon">📦</div>
+                    <h3>Supplier Management</h3>
+                    <p>Tracks supplier stock levels and readiness times to ensure delivery feasibility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Architecture & Methods</h2>
+            
+            <div class="highlight-box fade-in">
+                <h4>Agent-Based Orchestration (LangGraph)</h4>
+                <p>The system uses a state graph with specialized nodes that process logistics data in a coordinated pipeline. Each node handles a specific aspect of the optimization process.</p>
+            </div>
+
+            <div class="flow-diagram fade-in">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--dark);">Optimization Pipeline</h3>
+                <div class="flow-steps">
+                    <div class="flow-step">Supplier Check</div>
+                    <div class="flow-step">Forecast</div>
+                    <div class="flow-step">Routing</div>
+                    <div class="flow-step">Weather</div>
+                    <div class="flow-step">Cost</div>
+                    <div class="flow-step">Polyline</div>
+                </div>
+            </div>
+
+            <div class="card-grid" style="margin-top: 3rem;">
+                <div class="card fade-in">
+                    <h3>🔍 Supplier Node</h3>
+                    <p>Checks supplier stock levels and readiness times. Identifies potential risks if orders require suppliers with zero stock.</p>
+                </div>
+                <div class="card fade-in">
+                    <h3>📊 Forecast Node</h3>
+                    <p>Estimates demand based on current orders and suggests if additional vehicles are needed to meet capacity requirements.</p>
+                </div>
+                <div class="card fade-in">
+                    <h3>🗺️ Routing Node</h3>
+                    <p>Core optimization engine using Google OR-Tools to solve the Vehicle Routing Problem (VRP) with time windows, capacities, and service times.</p>
+                </div>
+                <div class="card fade-in">
+                    <h3>🌦️ Weather Node</h3>
+                    <p>Monitors weather conditions and adds time buffers (typically 10%) when rain or storm alerts are detected.</p>
+                </div>
+                <div class="card fade-in">
+                    <h3>💰 Cost Node</h3>
+                    <p>Calculates total cost metrics including distance costs, time costs, and late delivery penalties.</p>
+                </div>
+                <div class="card fade-in">
+                    <h3>📍 Polyline Node</h3>
+                    <p>Generates route visualization (GeoJSON), calculates ETAs for each stop, and computes on-time performance percentage.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box fade-in" style="margin-top: 3rem;">
+                <h4>Vehicle Routing Problem (VRP) Solver</h4>
+                <p>The system uses <strong>Google OR-Tools</strong> to solve complex routing problems that consider:</p>
+                <ul style="margin-top: 1rem; padding-left: 2rem; line-height: 2;">
+                    <li>Multi-vehicle routing optimization</li>
+                    <li>Vehicle capacity constraints</li>
+                    <li>Time windows (ready_time and due_time for each order)</li>
+                    <li>Service times at each delivery stop</li>
+                    <li>Minimized total travel time</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech">
+        <div class="container">
+            <h2 class="section-title">Technology Stack</h2>
+            
+            <div class="tech-grid">
+                <div class="tech-category fade-in">
+                    <h3>Backend Framework</h3>
+                    <ul class="tech-list">
+                        <li>FastAPI (Python)</li>
+                        <li>Uvicorn (ASGI Server)</li>
+                        <li>Pydantic (Data Validation)</li>
+                        <li>WebSocket Support</li>
+                    </ul>
+                </div>
+                <div class="tech-category fade-in">
+                    <h3>AI & Orchestration</h3>
+                    <ul class="tech-list">
+                        <li>LangGraph</li>
+                        <li>LangChain Core</li>
+                        <li>State Graph Management</li>
+                        <li>Multi-Agent Coordination</li>
+                    </ul>
+                </div>
+                <div class="tech-category fade-in">
+                    <h3>Optimization</h3>
+                    <ul class="tech-list">
+                        <li>Google OR-Tools</li>
+                        <li>VRP Solver</li>
+                        <li>Constraint Programming</li>
+                        <li>Time Window Optimization</li>
+                    </ul>
+                </div>
+                <div class="tech-category fade-in">
+                    <h3>External APIs</h3>
+                    <ul class="tech-list">
+                        <li>Mapbox (Routing & Directions)</li>
+                        <li>OpenWeatherMap (Weather Data)</li>
+                        <li>OSRM (Fallback Routing)</li>
+                        <li>Haversine (Distance Calculation)</li>
+                    </ul>
+                </div>
+                <div class="tech-category fade-in">
+                    <h3>Frontend</h3>
+                    <ul class="tech-list">
+                        <li>React 19</li>
+                        <li>TypeScript</li>
+                        <li>Vite (Build Tool)</li>
+                        <li>Mapbox GL JS</li>
+                        <li>Axios (HTTP Client)</li>
+                    </ul>
+                </div>
+                <div class="tech-category fade-in">
+                    <h3>Infrastructure</h3>
+                    <ul class="tech-list">
+                        <li>Docker</li>
+                        <li>Nginx</li>
+                        <li>Container Orchestration</li>
+                        <li>Multi-Container Setup</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Components Section -->
+    <section id="components" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Key Components & Files</h2>
+            
+            <div class="card-grid">
+                <div class="card fade-in">
+                    <h3>Backend Core</h3>
+                    <p><strong>main.py</strong> - FastAPI application with REST endpoints (/optimize, /suppliers/status, /incidents) and WebSocket endpoint (/ws/optimize)</p>
+                    <p style="margin-top: 1rem;"><strong>graph.py</strong> - Builds the LangGraph state graph defining node execution order</p>
+                    <p style="margin-top: 1rem;"><strong>nodes.py</strong> - Implements all orchestration nodes (supplier, forecast, routing, weather, cost, polyline)</p>
+                    <p style="margin-top: 1rem;"><strong>state.py</strong> - OrchestratorState Pydantic model holding all optimization data</p>
+                </div>
+                <div class="card fade-in">
+                    <h3>Optimization Tools</h3>
+                    <p><strong>ortools_vrp.py</strong> - Wraps Google OR-Tools VRP solver with time windows and capacity constraints</p>
+                    <p style="margin-top: 1rem;"><strong>mapbox_api.py</strong> - Mapbox Matrix API integration for travel time matrices</p>
+                    <p style="margin-top: 1rem;"><strong>route_api.py</strong> - Multi-source routing (Mapbox → OSRM → Haversine fallback)</p>
+                    <p style="margin-top: 1rem;"><strong>weather.py</strong> - OpenWeatherMap integration for weather alerts</p>
+                </div>
+                <div class="card fade-in">
+                    <h3>Frontend</h3>
+                    <p><strong>App.tsx</strong> - Main React component managing WebSocket connections and state</p>
+                    <p style="margin-top: 1rem;"><strong>Map.tsx</strong> - Mapbox GL map component for route visualization</p>
+                    <p style="margin-top: 1rem;"><strong>api.ts</strong> - Axios-based API client for REST calls</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            
+            <div class="feature-list">
+                <div class="feature-item fade-in">
+                    <h4>🎯 Multi-Constraint Optimization</h4>
+                    <p>Handles vehicle capacity, time windows, service times, and multiple delivery stops simultaneously</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <h4>⚡ Real-Time Route Updates</h4>
+                    <p>WebSocket-based live updates when orders are added or removed, with instant route recalculation</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <h4>🌦️ Weather-Aware Routing</h4>
+                    <p>Automatically adjusts time estimates based on weather conditions and adds buffers for adverse weather</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <h4>📦 Supplier Integration</h4>
+                    <p>Tracks supplier stock levels and readiness times to ensure delivery feasibility</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <h4>🚨 Incident Handling</h4>
+                    <p>Supports vehicle breakdowns and delays, triggering automatic re-optimization</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <h4>🗺️ Multi-Source Routing</h4>
+                    <p>Intelligent fallback system: Mapbox → OSRM → Haversine for maximum reliability</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <h4>📊 Comprehensive Metrics</h4>
+                    <p>Tracks distance, time, on-time percentage, and cost scores for route evaluation</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <h4>🖱️ Interactive Map</h4>
+                    <p>Click-to-add delivery stops with live route visualization and automatic bounds fitting</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Flow Section -->
+    <section id="dataflow" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Data Flow & Workflow</h2>
+            
+            <div class="card fade-in">
+                <h3>1. Initial Optimization (REST API)</h3>
+                <div class="code-block">
+                    <code>
+User clicks "Optimize" → 
+Frontend sends POST /optimize with orders/vehicles/constraints →
+Backend builds OrchestratorState →
+Runs LangGraph pipeline →
+Returns GeoJSON routes + metrics →
+Frontend displays on map
+                    </code>
+                </div>
+            </div>
+
+            <div class="card fade-in" style="margin-top: 2rem;">
+                <h3>2. Real-Time Updates (WebSocket)</h3>
+                <div class="code-block">
+                    <code>
+User clicks map → 
+Frontend sends {"type":"add_order", "order":{...}} via WS →
+Backend adds to orders_state →
+Recomputes optimization →
+Broadcasts {"type":"optimize_result", ...} to all clients →
+Frontend updates map instantly
+                    </code>
+                </div>
+            </div>
+
+            <div class="card fade-in" style="margin-top: 2rem;">
+                <h3>3. Optimization Pipeline Execution</h3>
+                <div class="code-block">
+                    <code>
+1. Supplier Check: Validates supplier availability
+2. Forecast: Estimates if more vehicles needed
+3. Routing: Gets distance matrix → Solves VRP → Assigns orders
+4. Weather: Checks alerts, adds buffer if needed
+5. Cost: Calculates cost metrics
+6. Polyline: Gets route geometry → Calculates ETAs → Computes on-time %
+                    </code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="font-size: 1.2rem; margin-bottom: 1rem;">Intelligent Logistics Orchestrator</p>
+            <p>An AI-powered logistics optimization system combining multi-agent orchestration, operations research, and real-time data integration</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">Built with ❤️ using FastAPI, LangGraph, OR-Tools, React, and Mapbox</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
